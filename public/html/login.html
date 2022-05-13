@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="../stylesheets/bootstrap.min.css">
+
+    <!-- icon -->
+    <link rel="shortcut icon" href="../icon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../icon/favicon.ico" type="image/x-icon">
+
+    <title>登录界面</title>
+    <!-- recaptcha -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+
+<body>
+    <div class="container">
+       
+        <div class="mb-5" id="register" style="display: none;"> 
+            <h2 class="text-center mt-5">注册</h2>
+            <small class="form-text text-muted">账号：</small>
+            <input type="text" class="form-control" name="" id="name1" placeholder="账号">
+            <small class="form-text text-muted">密码：</small>
+            <input type="password" class="form-control" name="" id="password1" placeholder="密码">
+            <small class="form-text text-muted">确认密码：</small>
+            <input type="password" class="form-control" name="" id="repassword" placeholder="确认密码">
+            <div class="g-recaptcha" data-sitekey="6Ld3s-gfAAAAANKZrffOb17MMMKGvOXZ0GcEZ3x1"></div>
+            <div  class="text-center mt-3"><button id="registerbtn" class="text-white border-0 btn-info rounded me-4" style="height: 40px;">确认注册</button><button class="text-white border-0 btn-info rounded ms-4" style="height: 40px; " onclick="document.location.reload();">返回</button></div>
+        </div>
+
+        <div class="mb-5" id="login"> 
+            <h2 class="text-center mt-5">登录</h2>
+            <small class="form-text text-muted">账号：</small>
+            <input type="text" class="form-control" name="" id="name" placeholder="账号">
+            <small class="form-text text-muted">密码：</small>
+            <input type="password" class="form-control" name="" id="password" placeholder="密码">
+            <div  class="text-center mt-3"><button id="submitbtn" class="text-white border-0 btn-info rounded me-4" style="height: 40px;">登录</button><button id="toregister" class="text-white border-0 btn-info rounded ms-4" style="height: 40px;">注册</button></div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/jsencrypt.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#toregister").click(function(){
+                $("#register").show();
+                $("#login").hide();
+            });
+            $("#registerbtn").click(function(){
+                var name=$("#name1").val();
+                var password=$("#password1").val();
+                var repassword=$("#repassword").val();
+                if (password!=repassword){
+                    window.alert("输入的密码不一致");
+                }
+                document.location.reload();
+            });
+             $("#submitbtn").click(function () {
+                var name=$("#name").val();
+                var password=$("#password").val();
+                var datas={"encrypted":encryption(name+"$"+password)};
+                $.ajax({
+                    url : remoteUrl+'/login',
+                    type : "POST",
+                    contentType : "application/json;charset=utf-8",
+                    data : JSON.stringify(datas),
+                    success : function(data){
+                        if(data.code=="1"){
+                            window.location.replace(remoteUrl+"/home.html");
+                        }
+                        else{
+                            window.alert("登录失败");
+                        }
+                    },
+                    error : function(xhr){
+                        console.log(xhr.responseText);
+                    }
+                    
+                });
+            });
+        });
+        function encryption(str){
+            var encrypt = new JSEncrypt();
+            encrypt.setPublicKey(public_key);
+            var encrypted = encrypt.encrypt(str);
+            return encrypted;
+        }
+        function dencryption(encrypted){
+            var decrypt = new JSEncrypt();
+            decrypt.setPrivateKey(private_key);
+            var decrypted = decrypt.decrypt(encrypted);
+            return decrypted;
+        }
+    </script>
+</body>
+
+</html>

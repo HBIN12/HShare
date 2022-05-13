@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="../stylesheets/bootstrap.min.css">
+
+    <!-- icon -->
+    <link rel="shortcut icon" href="../icon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../icon/favicon.ico" type="image/x-icon">
+
+    <title></title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row bg-info">
+            <div class="col text-center"><button class="text-center bg-info border-0" title="上传" id="upload"><svg
+                        t="1651044800420" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="2067" width="64" height="64">
+                        <path
+                            d="M576 631.466667V725.333333h170.666667c59.733333-8.533333 106.666667-64 106.666666-128 0-72.533333-55.466667-128-128-128-17.066667 0-29.866667 4.266667-42.666666 8.533334V469.333333c0-93.866667-76.8-170.666667-170.666667-170.666666s-170.666667 76.8-170.666667 170.666666c0 17.066667 4.266667 29.866667 4.266667 46.933334-8.533333-4.266667-17.066667-4.266667-25.6-4.266667C260.266667 512 213.333333 558.933333 213.333333 618.666667S260.266667 725.333333 320 725.333333h170.666667v-93.866666l-46.933334 46.933333L384 618.666667l149.333333-149.333334 149.333334 149.333334-59.733334 59.733333-46.933333-46.933333z m0 93.866666v85.333334h-85.333333v-85.333334h-42.666667v85.333334h-128C213.333333 810.666667 128 725.333333 128 618.666667c0-85.333333 55.466667-157.866667 128-183.466667C273.066667 311.466667 379.733333 213.333333 512 213.333333c110.933333 0 209.066667 72.533333 243.2 170.666667 102.4 12.8 183.466667 102.4 183.466667 213.333333s-85.333333 200.533333-192 213.333334h-128v-85.333334h-42.666667z"
+                            fill="#ffffff" p-id="2068"></path>
+                    </svg></button></div>
+
+            <div class="col text-center">
+                <button class="text-center bg-info border-0" title="主页" onclick="document.location.reload()"><svg
+                        t="1651045251193" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="3438" width="64" height="64">
+                        <path
+                            d="M941.5 505.8L559.2 159.4l-25.6-23.2c-12.2-10.9-31.8-10.9-43.9 0l-408 369.6c-12.2 11-18.7 25.7-18.6 41.3 0.4 31.6 29.4 56.8 64.2 56.8h42.1V896H854V603.9h42.9c16.9 0 32.9-6 44.8-16.9 12-10.9 18.5-25.3 18.5-40.6-0.1-15.3-6.7-29.7-18.7-40.6zM567 831.4H456.1v-183H567v183z m215.6-292.1v292.1H630.3V626.9c0-19.8-17.7-35.9-39.6-35.9H432.4c-21.9 0-39.6 16.1-39.6 35.9v204.5H240.5V539.3h-95l366.1-331.6 22.9 20.7 343.2 310.9h-95.1z m0 0"
+                            p-id="3439" fill="#ffffff"></path>
+                    </svg></button>
+            </div>
+
+            <div class="col text-center"><button class="text-center bg-info border-0" title="退出登录" onclick="logout();">
+                    <svg t="1651116276575" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="9288" width="58" height="58">
+                        <path
+                            d="M814 65.9H265.7c-80.5 0-146 65.5-146 146V320c0 19.9 16.1 36 36 36s36-16.1 36-36V211.9c0-40.8 33.2-74 74-74H814c40.8 0 74 33.2 74 74v602.6c0 40.8-33.2 74-74 74H265.7c-40.8 0-74-33.2-74-74V704.2c0-19.9-16.1-36-36-36s-36 16.1-36 36v110.3c0 80.5 65.5 146 146 146H814c80.5 0 146-65.5 146-146V211.9c0-80.5-65.5-146-146-146z"
+                            p-id="9289" fill="#ffffff"></path>
+                        <path
+                            d="M549.7 680.5c-13.5 14.6-12.6 37.4 2 50.9 6.9 6.4 15.7 9.6 24.4 9.6 9.7 0 19.4-3.9 26.5-11.6l177.4-192c6.5-7 9.6-15.9 9.5-24.8 0.1-8.8-3.1-17.7-9.5-24.8l-177.4-192c-13.5-14.6-36.3-15.5-50.9-2-14.6 13.5-15.5 36.3-2 50.9l121.6 131.6H100c-19.9 0-36 16.1-36 36s16.1 36 36 36h571.8L549.7 680.5z"
+                            p-id="9290" fill="#ffffff"></path>
+                    </svg>
+                </button></div>
+        </div>
+
+        <!-- 文件上传(隐藏) -->
+        <input id="uploadfile" type="file" multiple style="display: none;">
+
+        <!-- 进度条 -->
+        <div class="row mt-1">
+            <div class="progress rounded-pill p-0" style="display: none;">
+                <div id="progress" class="progress-bar progress-bar-animated progress-bar-striped bg-info"
+                    style="width: 0;">
+                </div>
+            </div>
+        </div>
+
+        <!-- 文件类型切换 -->
+        <div class="row mt-1">
+            <div class="col"></div>
+            <div class="col text-center"><button class="btn btn-info text-white border-2" id="pubfilesbt">共享</button>
+            </div>
+
+            <div class="col text-center"><button class="btn btn-light text-info border-info border-2"
+                    id="prifilesbt">个人</button>
+            </div>
+            <div class="col"></div>
+        </div>
+
+        <!-- 搜索框 -->
+        <form class="row g-3 justify-content-center mt-1">
+            <div class="col-8">
+                <input type="text" class="form-control" id="searchtext" placeholder="请输入文件名">
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-info mb-3 text-white" id="searchbtn">搜索</button>
+            </div>
+        </form>
+        <!-- 文件展示列表 -->
+        <div id="files"></div>
+
+        <!-- 文件为空时显示-->
+        <div id="nullfiles" class="text-center text-danger" style="display: none;">
+            <img src="../images/wushuju.png" class="w-25 h-25">
+            <p>暂无数据
+            </p>
+        </div>
+
+        <!-- 翻页 -->
+        <div id="turnpages">
+            <div class="row text-center">
+                <div class="col text-center text-info" id="page"></div>
+            </div>
+            <div class="row text-center">
+                <div class="col text-end">
+                    <button class="rounded border-0 bg-info" title="上一页" id="lastpage"><svg t="1651114750564"
+                            class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                            p-id="2750" width="48" height="48">
+                            <path
+                                d="M750.381737 221.002416 463.634967 511.525186l286.74677 290.511513c8.848529 8.875135 15.504112 19.020192 19.917632 30.41266 4.437056 11.366885 6.655584 22.933315 6.655584 34.649148 0 11.691273-2.218528 23.108301-6.655584 34.17638-4.41352 11.067057-11.06808 21.039175-19.917632 29.888727-17.749246 18.371416-38.937824 27.545356-63.641459 27.545356-24.653493 0-45.86663-9.17394-63.591317-27.545356L276.6012 581.77311c-8.875135-8.848529-15.829524-19.443841-20.889773-31.80845-5.060249-12.339026-7.927553-24.828478-8.525164-37.491892-0.648776-12.650111 0.921999-24.839735 4.735861-36.544311 3.789303-11.715833 10.121522-21.363564 18.995633-28.966729L623.148961 91.8755c17.699104-17.723663 38.937824-26.585495 63.591317-26.585495 24.704658 0 45.893236 8.861832 63.641459 26.585495 8.848529 8.861832 15.480576 18.98233 19.917632 30.374798s6.655584 22.946618 6.655584 34.662451c0 11.704576-2.218528 23.108301-6.655584 34.175357C765.885849 202.169489 759.230266 212.140585 750.381737 221.002416L750.381737 221.002416 750.381737 221.002416zM750.381737 221.002416"
+                                p-id="2751" fill="#ffffff"></path>
+                        </svg></button>
+                </div>
+                <div class="col text-start">
+                    <button class="rounded border-0 bg-info" title="下一页" id="nextpage"><svg t="1651114774409"
+                            class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                            p-id="3016" width="48" height="48">
+                            <path
+                                d="M273.61724 221.002416 273.61724 221.002416c-8.848529-8.861832-15.504112-18.832927-19.917632-29.913287-4.437056-11.067057-6.655584-22.471804-6.655584-34.175357 0-11.715833 2.218528-23.269983 6.655584-34.662451s11.06808-21.511943 19.917632-30.374798c17.749246-17.723663 38.937824-26.585495 63.641459-26.585495 24.653493 0 45.892213 8.861832 63.591317 26.585495l352.232227 355.086228c8.874111 7.603165 15.205307 17.249873 18.995633 28.966729 3.813862 11.704576 5.384637 23.8942 4.735861 36.544311-0.597611 12.663414-3.464915 25.152866-8.525164 37.491892-5.060249 12.364609-12.014638 22.959921-20.889773 31.80845L400.850016 931.163615c-17.723663 18.371416-38.937824 27.545356-63.591317 27.545356-24.704658 0-45.893236-9.17394-63.641459-27.545356-8.848529-8.849552-15.504112-18.821671-19.917632-29.888727-4.437056-11.06808-6.655584-22.48613-6.655584-34.17638 0-11.715833 2.218528-23.282263 6.655584-34.649148 4.41352-11.392468 11.06808-21.537526 19.917632-30.41266l286.74677-290.511513L273.61724 221.002416 273.61724 221.002416zM273.61724 221.002416"
+                                p-id="3017" fill="#ffffff"></path>
+                        </svg></button>
+                </div>
+            </div>
+        </div>
+        <!-- 共享确认框 -->
+        <div id="shareconfirmbox" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">共享确认框</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>确定共享该文件吗？</p>
+                        <p class="text-secondary"><small>多次共享违规资源账号将会被封禁</small></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-info text-white" id="sharedconfirm">共享</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 删除确认框 -->
+        <div id="deleteconfirmbox" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">删除确认框</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>确定删除该文件吗？</p>
+                        <p class="text-secondary"><small>删除后无法撤销！</small></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-info text-white" id="deleteconfirm">删除</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 举报确认框 -->
+        <div id="reportconfirmbox" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">举报确认框</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>确定举报该文件吗？</p>
+                        <p class="text-secondary"><small>多个用户举报后文件将进行下架</small></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-info text-white" id="reportconfirm">举报</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script type="text/javascript" src="../js/bootstrap.bundle.min.js"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/js.cookie.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var page = 1;
+            var ispub = 1;
+            var pagesize = 10;
+            var totalpage = Math.ceil((getfiles(ispub, page, pagesize)) / pagesize);
+            $("#page").html(page + "/" + totalpage);
+            document.title = $.cookie("name") + "的主页";
+            //上传功能
+            $("#upload").click(function () {
+                $("#uploadfile").trigger('click');
+            });
+            $("#uploadfile").change(function () {
+                $(".progress").show();
+                var files = $('#uploadfile').prop('files');//获取到文件列表
+                if (files.length > 0) {
+                    uploadfiles(files);
+                }
+            });
+            //搜索功能
+            $("#searchbtn").click(function () {
+                totalpage = Math.ceil((getfiles(ispub, page, pagesize, $("#searchtext").val())) / pagesize);
+                $("#page").html(page + "/" + totalpage);
+            })
+
+            //文件按钮切换
+            $("#pubfilesbt").click(function () {
+                $("#pubfilesbt").attr({ "class": "btn btn-info text-white border-2" });
+                $("#prifilesbt").attr({ "class": "btn btn-light text-info border-info border-2" });
+                ispub = 1;
+                page = 1;
+                totalpage = Math.ceil((getfiles(ispub, page, pagesize)) / pagesize);
+                $("#page").html(page + "/" + totalpage);
+            });
+
+            $("#prifilesbt").click(function () {
+                $("#prifilesbt").attr({ "class": "btn btn-info text-white border-2" });
+                $("#pubfilesbt").attr({ "class": "btn btn-light text-info border-info border-2" });
+                ispub = 0;
+                page = 1;
+                totalpage = Math.ceil((getfiles(ispub, page, pagesize)) / pagesize);
+                $("#page").html(page + "/" + totalpage);
+            });
+
+            //翻页
+            $("#lastpage").click(function () {
+                if (page != 1) {
+                    page = page - 1;
+                    getfiles(ispub, page, pagesize);
+                    $("#page").html(page + "/" + totalpage);
+                }
+            });
+            $("#nextpage").click(function () {
+                if (page != totalpage) {
+                    page = page + 1;
+                    getfiles(ispub, page, pagesize);
+                    $("#page").html(page + "/" + totalpage);
+                }
+            });
+        });
+
+
+        function uploadfiles(files) {
+            var pd = new FormData();
+            for (i = 0; i < files.length; i++) {
+                pd.append("files", files[i]);
+            }
+            $.ajax({
+                type: "POST",
+                url: remoteUrl + "/uploadfiles",
+                data: pd,
+                cache: false,
+                processData: false,
+                contentType: false,
+                xhr: function () {
+                    myXhr = $.ajaxSettings.xhr();
+                    if (myXhr.upload) { // check if upload property exists 
+                        myXhr.upload.addEventListener('progress', function (e) {
+                            var loaded = e.loaded;//已经上传大小情况
+                            var tot = e.total;//附件总大小
+                            var per = Math.floor(100 * loaded / tot).toFixed(2);
+                            $("#progress").attr({ "style": "width: " + per + "%" });//设置进度显示百分比
+                            // $("#progress").css("width", per + "%"); //设置完成的进度条宽度
+
+                        }, false); // for handling the progress of the upload
+                    }
+                    return myXhr;
+                },
+                success: function (data) {
+                    if (data.code == 1) {
+                        window.alert("上传成功");
+                        document.location.reload();
+                    }
+                    else {
+                        window.alert("上传失败");
+                    }
+                    $("#uploadfile").val("");
+                    $(".progress").hide();
+                },
+                error: function () {
+                    window.alert("上传异常");
+                    $("#uploadfile").val("");
+                    $(".progress").hide();
+                }
+
+            });
+        }
+
+
+        function getfiles(ispub, page, pagesize, searchtext) {
+            var filesnum = 1;
+            $.ajax({
+                url: remoteUrl + '/getfiles',
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                async: false,
+                data: JSON.stringify({ "ispub": ispub, "page": page, "pagesize": pagesize, "searchtext": searchtext }),
+                success: function (data) {
+                    var html = `<table class="table text-center bg-light">
+            <thead>
+                <tr>
+                    <th scope="col">文件名</th>
+                    <th scope="col">上传时间</th>
+                    <th scope="col">文件大小</th>
+                    <th scope="col">操作</th>
+                </tr>
+            </thead>
+            <tbody>`;
+                    if (data.filesnum == 0) {
+                        $("#files").hide();
+                        $("#turnpages").hide();
+                        $("#nullfiles").show();
+                    }
+                    else {
+                        $("#files").show();
+                        $("#nullfiles").hide();
+                        $("#turnpages").show();
+                        filesnum = data.filesnum;
+                    }
+                    for (file of data.datas) {
+                        var filesize = (sizeformat(file.size));
+                        var uploadtime = dateformat(file.uploadtime);
+                        if (ispub == 1) {
+                            html = html + `<tr><th scope="row">` + file.fname + `</th><td>` + uploadtime + `</td><td>` + filesize + `</td><td><button class="btn-xs btn-info text-white  border-0 rounded-pill" onclick="report(` + file.fid + `)">举报</button><button class="btn-xs btn-info text-white  border-0 rounded-pill" onclick="download(` + file.fid + `)">下载</button></td></tr>`;
+                        }
+                        else {
+                            html = html + `<tr><th scope="row">` + file.fname + `</th><td>` + uploadtime + `</td><td>` + filesize + `</td><td><button class="btn-xs btn-info text-white  border-0 rounded-pill" onclick="shared(` + file.fid + `)">共享</button><button class="btn-xs btn-info text-white  border-0 rounded-pill" onclick="download(` + file.fid + `)">下载</button><button class="btn-xs btn-info text-white  border-0 rounded-pill" onclick="deletefile(` + file.fid + `)">删除</button></td></tr>`;
+                        }
+                    }
+                    html = html + ` </tbody>
+        </table>`;
+                    $("#files").html(html);
+                },
+                error: function (xhr) {
+                    console.log(xhr.responseText);
+                }
+            }); return filesnum;
+        }
+        //共享文件
+        function shared(fid) {
+            $("#shareconfirmbox").modal("show");
+            $("#sharedconfirm").click(function () {
+                $.ajax({
+                    type: "GET",
+                    url: remoteUrl + "/shared?fid=" + fid + "",
+                    success: function (response) {
+                        $("#shareconfirmbox").modal("hide");
+                        window.alert(response.msg);
+                        document.location.reload();
+                    }
+                });
+            });
+        }
+
+        //删除文件
+        function deletefile(fid) {
+            $("#deleteconfirmbox").modal("show");
+            $("#deleteconfirm").click(function () {
+                $.ajax({
+                    type: "GET",
+                    url: remoteUrl + "/deletefile?fid=" + fid + "",
+                    success: function (response) {
+                        $("#deleteconfirmbox").modal("hide");
+                        window.alert(response.msg);
+                        document.location.reload();
+                    }
+                });
+            });
+
+        }
+
+        //下载文件
+        function download(fid) {
+            window.location.href = remoteUrl + "/download?fid=" + fid;
+        }
+
+        function report(fid) {
+            $("#reportconfirmbox").modal("show");
+            $("#reportconfirm").click(function () {
+                $.ajax({
+                    type: "GET",
+                    url: remoteUrl + "/report?fid=" + fid,
+                    success: function (response) {
+                        $("#reportconfirmbox").modal("hide");
+                        window.alert(response.msg);
+                        document.location.reload();
+                    }
+                });
+            });
+
+        }
+
+
+        function sizeformat(size) {
+            if (size < 1024) {
+                return size + "B";
+            }
+            else if (size < 1048576) {
+                return (size / 1024).toFixed(2) + "KB";
+            }
+            else if (size < 1073741824) {
+                return (size / 1024 / 1024).toFixed(2) + "MB";
+            }
+            else if (size < 1099511627776) {
+                return (size / 1024 / 1024 / 1024).toFixed(2) + "GB";
+            }
+            else {
+                return (size / 1024 / 1024 / 1024 / 1024).toFixed(2) + "TB";
+            }
+        }
+        function dateformat(date) {
+            return date.substring(0, 10) + " " + date.substring(11, 19);
+        }
+        function logout() {
+            $.removeCookie('taken');
+            window.location.replace(remoteUrl + "/login.html")
+        }
+    </script>
+
+</body>
+
+</html>

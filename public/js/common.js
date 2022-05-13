@@ -1,0 +1,7 @@
+var public_key=`-----BEGIN PUBLIC KEY-----
+MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAM75rfwLKFI4zA5MtlFfTf0PVRX4UpCC
+A+ridiLmx4UjvNS9LbQJNV4qLpRMgSUx18jXNk/4bp6TDsvGbiEW1c0CAwEAAQ==
+-----END PUBLIC KEY-----
+`
+
+var remoteUrl="http://127.0.0.1:3000";
