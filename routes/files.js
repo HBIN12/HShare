@@ -68,6 +68,9 @@ router.post("/uploadfiles", upload.array("files"), async function (req, res) {
 router.get("/shared", async function (req, res) {
     try {
         var file=(await db.query("select * from files where ispub=0 and fid=? and uid=?", [req.query.fid, req.cookies.id]))[0];
+        if((await db.query("select count(*) as num from files where ispub=1 and uid=? and fname=?",[req.cookies.id,file.fname]))[0].num>0){
+            return res.json({"code":"0","msg":"共享文件已存在"});
+        }
         await db.query("insert into files(fname,fpath,uid,ispub,uploadtime,size) values(?,?,?,?,?,?)", [file.fname, file.fpath, req.cookies.id, 1, new Date().toLocaleString(), file.size]);
         res.json({ "code": "1", "msg": "共享成功" });
     } catch (error) {
