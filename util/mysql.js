@@ -5,7 +5,8 @@ var pool = mysql.createPool({
   host: '43.154.33.229',
   user: 'root',
   password: '1135911642',
-  database: 'HBIN'
+  database: 'HBIN',
+  dateStrings : true, //解决时间格式
 });
 db.query = function () {
   var sql, para;

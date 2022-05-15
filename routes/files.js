@@ -24,9 +24,9 @@ router.post("/getfiles", async function (req, res) {
             var filesnum = (await db.query("select count(*) as filesnum from files where ispub=? and uid=? and fname LiKE ?", [req.body.ispub, req.cookies.id, searchtext]))[0].filesnum;
             var datas = await db.query("select * from files where ispub=? and uid=? and fname LiKE ? ORDER BY uploadtime DESC LIMIT ? OFFSET ? ;", [req.body.ispub, req.cookies.id, searchtext, req.body.pagesize, req.body.pagesize * (req.body.page - 1)]);
         }
+        
         res.json({ "datas": datas, "filesnum": filesnum });
     } catch (error) {
-        console.log(error);
         res.json({ "code": "0", "msg": "获取文件信息失败" });
     }
 
@@ -53,7 +53,7 @@ router.post("/uploadfiles", upload.array("files"), async function (req, res) {
             fs.renameSync(uploadpath + file.filename, filesuploadpath + filename);
 
             //将文件信息写入数据库
-            await db.query("insert into files(fname,fpath,uid,ispub,uploadtime,size) values(?,?,?,?,?,?)", [filename, filesuploadpath + filename, req.cookies.id, 0, new Date(), file.size]);
+            await db.query("insert into files(fname,fpath,uid,ispub,uploadtime,size) values(?,?,?,?,?,?)", [filename, filesuploadpath + filename, req.cookies.id, 0, new Date().toLocaleString(), file.size]);
         }
         res.json({ "code": 1, "msg": "上传成功" })
     }
@@ -68,7 +68,7 @@ router.post("/uploadfiles", upload.array("files"), async function (req, res) {
 router.get("/shared", async function (req, res) {
     try {
         var file=(await db.query("select * from files where ispub=0 and fid=? and uid=?", [req.query.fid, req.cookies.id]))[0];
-        await db.query("insert into files(fname,fpath,uid,ispub,uploadtime,size) values(?,?,?,?,?,?)", [file.fname, file.fpath, req.cookies.id, 1, new Date(), file.size]);
+        await db.query("insert into files(fname,fpath,uid,ispub,uploadtime,size) values(?,?,?,?,?,?)", [file.fname, file.fpath, req.cookies.id, 1, new Date().toLocaleString(), file.size]);
         res.json({ "code": "1", "msg": "共享成功" });
     } catch (error) {
         res.json({ "code": "0", "msg": "共享失败" });
