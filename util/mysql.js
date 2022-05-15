@@ -2,10 +2,10 @@ var db = {};
 var mysql = require('mysql');
 var pool = mysql.createPool({
   connectionLimit: 100,
-  host: '',
+  host: '43.154.33.229',
   user: 'root',
-  password: '',
-  database: '',
+  password: '1135911642',
+  database: 'HBIN',
   dateStrings : true, //解决时间格式
 });
 db.query = function () {

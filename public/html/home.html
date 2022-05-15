@@ -196,10 +196,6 @@
     <script src="../js/js.cookie.min.js"></script>
     <script>
         $(document).ready(function () {
-            if( $.cookie("taken")==undefined){
-                window.alert("未登录")
-                window.location.replace("/login.html")
-            };
             var page = 1;
             var ispub = 1;
             var pagesize = 10;
@@ -317,6 +313,10 @@
                 async: false,
                 data: JSON.stringify({ "ispub": ispub, "page": page, "pagesize": pagesize, "searchtext": searchtext }),
                 success: function (data) {
+                	  if(data.datas==undefined){
+                         window.alert("未登录");
+                         window.location.replace("/login.html");
+                     }
                     var html = `<table class="table-sm  text-center bg-light w-100 h-100">
             <thead>
                 <tr>

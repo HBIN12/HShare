@@ -1,0 +1,13 @@
+Unknown command: "satrt"
+
+To see a list of supported npm commands, run:
+  npm help
+
+> app@0.0.0 start
+> node ./bin/www
+
+
+> app@0.0.0 start
+> node ./bin/www
+
+Port 3000 is already in use
