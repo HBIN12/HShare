@@ -6,7 +6,7 @@
 #### 功能简介：实现登录注册功能，对登录的账号密码进行rsa加密进行服务端验证，文件的上传下载共享删除举报功能。适用人群：有文件共享存储需求的公司小群组和学校班级群组。
 ## 部署到服务器(以centos7为例)
 ### 1 克隆仓库
-`git clone ""`
+`git clone "https://github.com/HBIN12/HShare.git"`
 ### 2 安装nodejs和npm
 `yum install nodejs;`
 `yum install npm;`
