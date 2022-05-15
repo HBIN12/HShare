@@ -3,7 +3,7 @@ var router = express.Router();
 var db = require("../util/mysql")
 router.use(async function (req, res, next) {
     try {
-        if (req.originalUrl != "/login" && req.originalUrl != "/login.html") {
+        if (req.originalUrl != "/login" && req.originalUrl != "/login.html"&&req.originalUrl != "/register") {
             var taken = req.cookies.taken;
             var id = req.cookies.id;
             var data = await db.query("select taken from user where id=?", [id]);

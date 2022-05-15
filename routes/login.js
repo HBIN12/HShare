@@ -28,4 +28,30 @@ router.post("/login",async function (req, res) {
     }
 });
 
+router.post("/register",async function(req,res){
+    try {
+        var name=req.body.name;
+        var password=req.body.password;
+        var regex=/(?!^\d+$)(?!^[a-zA-Z]+$)[0-9a-zA-Z]{4,23}/;
+        
+        if(name.length<=4||name.length>=20){
+            return res.json({"code":0,"msg":"账号长度应大于4位字符小于20位字符"});
+        }
+        if(regex.test(password)==false){
+            return res.json({"code":0,"msg":"密码应为6到20为数字英文组合"});
+        }
+        if((await db.query("select count(*) as num from user where name=?",[name]))[0].num==1){
+            return res.json({"code":0,"msg":"该用户名已存在"});
+        }
+        await db.query("insert into user (name,password) values (?,?)",[name,password]);
+        res.json({"code":1,"msg":"用户 "+name+" 注册成功"})
+
+
+    } catch (error) {
+        res.json({"code":0,"msg":"注册异常"});
+    }
+
+
+});
+
 module.exports = router;

@@ -29,7 +29,6 @@
             <input type="password" class="form-control" name="" id="password1" placeholder="密码">
             <small class="form-text text-muted">确认密码：</small>
             <input type="password" class="form-control" name="" id="repassword" placeholder="确认密码">
-            <div class="g-recaptcha" data-sitekey="6Ld3s-gfAAAAANKZrffOb17MMMKGvOXZ0GcEZ3x1"></div>
             <div  class="text-center mt-3"><button id="registerbtn" class="text-white border-0 btn-info rounded me-4" style="height: 40px;">确认注册</button><button class="text-white border-0 btn-info rounded ms-4" style="height: 40px; " onclick="document.location.reload();">返回</button></div>
         </div>
 
@@ -68,10 +67,29 @@
                 var name=$("#name1").val();
                 var password=$("#password1").val();
                 var repassword=$("#repassword").val();
+                var recaptcha=$(".g-recaptcha").val();
                 if (password!=repassword){
                     window.alert("输入的密码不一致");
                 }
-                document.location.reload();
+                else{
+                    var data={"name":name,"password":password};
+                    $.ajax({
+                        type: "POST",
+                        url: remoteUrl+'/register',
+                        contentType : "application/json;charset=utf-8",
+                        data : JSON.stringify(data),
+                        success: function (response) {
+                            if(response.code==0){
+                                window.alert(response.msg);
+                            }
+                            else{
+                                window.alert(response.msg);
+                                document.location.reload();
+                            }
+                        }
+                    });
+                }
+                
             });
              $("#submitbtn").click(function () {
                 var name=$("#name").val();
