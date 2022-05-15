@@ -4,4 +4,4 @@ dz9qPIaN3nDLtnZ0g4uqiNXKoc49L1FSnQQ9Q1Jc9gF7+oJcGZab2gcCAwEAAQ==
 -----END PUBLIC KEY-----
 `
 
-var remoteUrl="https://hbin.club";
+var remoteUrl="http://127.0.0.1:3000";
