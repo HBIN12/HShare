@@ -196,6 +196,10 @@
     <script src="../js/js.cookie.min.js"></script>
     <script>
         $(document).ready(function () {
+            if( $.cookie("taken")==undefined){
+                window.alert("未登录")
+                window.location.replace("/login.html")
+            };
             var page = 1;
             var ispub = 1;
             var pagesize = 10;
@@ -313,11 +317,11 @@
                 async: false,
                 data: JSON.stringify({ "ispub": ispub, "page": page, "pagesize": pagesize, "searchtext": searchtext }),
                 success: function (data) {
-                	  if(data.datas==undefined){
+                     if(data.datas==undefined){
                          window.alert("未登录");
                          window.location.replace("/login.html");
                      }
-                    var html = `<table class="table-sm  text-center bg-light w-100 h-100">
+                    var html = `<table class="table bg-light text-center" style="width: 100%; table-layout: fixed; word-break: break-all;">
             <thead>
                 <tr>
                     <th scope="col">文件名</th>
@@ -342,10 +346,10 @@
                         var filesize = (sizeformat(file.size));
                         var uploadtime = dateformat(file.uploadtime);
                         if (ispub == 1) {
-                            html = html + `<tr><th scope="row">` + file.fname + `</th><td>` + uploadtime + `</td><td>` + filesize + `</td><td><button class="btn-xs btn-info text-white  border-0 rounded-pill" onclick="report(` + file.fid + `)">举报</button><button class="btn-xs btn-info text-white  border-0 rounded-pill" onclick="download(` + file.fid + `)">下载</button></td></tr>`;
+                            html = html + `<tr><td>` + file.fname + `</td><td>` + uploadtime + `</td><td>` + filesize + `</td><td><button class="btn-xs btn-info text-white  border-0 rounded-pill" onclick="report(` + file.fid + `)">举报</button><button class="btn-xs btn-info text-white  border-0 rounded-pill" onclick="download(` + file.fid + `)">下载</button></td></tr>`;
                         }
                         else {
-                            html = html + `<tr><th scope="row">` + file.fname + `</th><td>` + uploadtime + `</td><td>` + filesize + `</td><td><button class="btn-xs btn-info text-white  border-0 rounded-pill" onclick="shared(` + file.fid + `)">共享</button><button class="btn-xs btn-info text-white  border-0 rounded-pill" onclick="download(` + file.fid + `)">下载</button><button class="btn-xs btn-info text-white  border-0 rounded-pill" onclick="deletefile(` + file.fid + `)">删除</button></td></tr>`;
+                            html = html + `<tr><th>` + file.fname + `</th><td>` + uploadtime + `</td><td>` + filesize + `</td><td><button class="btn-xs btn-info text-white  border-0 rounded-pill" onclick="shared(` + file.fid + `)">共享</button><button class="btn-xs btn-info text-white  border-0 rounded-pill" onclick="download(` + file.fid + `)">下载</button><button class="btn-xs btn-info text-white  border-0 rounded-pill" onclick="deletefile(` + file.fid + `)">删除</button></td></tr>`;
                         }
                     }
                     html = html + ` </tbody>
